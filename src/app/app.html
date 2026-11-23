@@ -1,0 +1,60 @@
+<main class="pagina">
+  <header class="topo">
+    <p class="selo">Angular · Pipes</p>
+    <h1>A agenda passa a falar português</h1>
+  </header>
+
+  <!-- 02 · Pipes prontos na lista de eventos -->
+  <section>
+    <h2>Eventos</h2>
+    <div class="grade">
+      @for (e of eventos; track e.nome) {
+        <article class="cartao">
+          <h3>{{ e.nome | titlecase }}</h3>
+          <p class="local">{{ e.local | uppercase }}</p>
+          <dl>
+            <dt>Data</dt>
+            <dd>{{ e.data | date: "EEEE, d 'de' MMMM 'de' y" }}</dd>
+            <dt>Horário</dt>
+            <dd>{{ e.data | date: 'HH:mm' }}</dd>
+            <dt>Ingresso</dt>
+            <dd>{{ e.preco === 0 ? 'Gratuito' : (e.preco | currency) }}</dd>
+            <dt>Ocupação</dt>
+            <dd>{{ e.ocupacao | percent }}</dd>
+            <dt>Confirmados</dt>
+            <dd>{{ e.confirmados | number: '1.0-1' }}</dd>
+          </dl>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- 04 · Os quatro pipes criados, na lista de participantes -->
+  <section>
+    <h2>Participantes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Pagamento</th>
+          <th>Evento</th>
+          <th>Data do evento</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of participantes; track $index) {
+          <tr>
+            <td><span class="avatar">{{ p.nome | iniciais }}</span></td>
+            <td>{{ p.nome || '—' }}</td>
+            <td>{{ p.telefone | telefone }}</td>
+            <td>{{ p.pagamento | formaPagamento }}</td>
+            <td>{{ p.evento | titlecase }}</td>
+            <td>{{ p.data | diasPara }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>
